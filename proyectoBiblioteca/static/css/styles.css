@@ -1,0 +1,63 @@
+
+.navbar {
+    background-color: #4A148C;
+    color: #fff;
+}
+.navbar a, .navbar a:hover {
+    color: #fff;
+}
+li:hover{
+    transition: 0.2s;
+    border-bottom: solid #4A148C;
+    color: white;
+}
+
+.imagenLogoCaldera{
+    height: 50px;
+
+}
+
+.header {
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    background-color: #4A148C;
+}
+.header .logo {
+    font-weight: bold;
+}
+.banner {
+    background-image: url(https://th.bing.com/th/id/R.3c0058ca746d1e56ed8ed95d028722b1?rik=LE5lJhn019coiQ&riu=http%3a%2f%2f4.bp.blogspot.com%2f-08P-dFRlPlM%2fUcM0BI1UmfI%2fAAAAAAAAAo8%2fRz2TzKejk_0%2fs1600%2f160%2bcaldera.jpg&ehk=Qkq2T5xgL%2f7kO9T%2bjEXMc5pjI7NBr5MImdf7CGw0sUA%3d&risl=&pid=ImgRaw&r=0);
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    color: #fff;
+    text-align: center;
+}
+.banner h1 {
+    
+    font-size: 36px;
+    font-weight: bold;
+}
+.banner p {
+    font-size: 18px;
+}
+.services {
+    padding: 40px 20px;
+    text-align: center;
+}
+.services .service {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+}
+.services .service i {
+    font-size: 30px;
+    color: #4A148C;
+}
+.services .service h5 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
