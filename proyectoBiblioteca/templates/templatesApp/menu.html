@@ -25,7 +25,7 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="#" style="color: black">Prestamo</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Prestamos</a>
@@ -56,13 +56,17 @@
     <!-- Sección de servicios -->
     <div class="services container">
         <div class="row" style="margin-left: 15%;">
-            <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-file"></i>
-                <h5>Prestamo</h5>
+            <a href="{%url "lista-prestamo" %}">
+                <div class="col-md-3 service" style="cursor: pointer;">
+                    <i class="bi bi-file"></i>
+                    <h5>Prestamo</h5>
+            </a>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-files"></i>
-                <h5>Prestamos</h5>
+                <a href="{%url "prestamos-confirmados" %}">
+                    <i class="bi bi-files"></i>
+                    <h5>Prestamos</h5>
+                </a>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
                 <i class="bi bi-book-half"></i>
