@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand logo" href="{%url "menu-principal" %}">
+                <i class="bi bi-book"></i> Biblioteca - Caldera
+            </a>
+            <div class="div-imagenLogoCaldera">
+                <img  class="imagenLogoCaldera" src="{% static 'img/PngItem_5278850.png'%}">
+            </div>
+            
+        </div>
+    </nav>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black; border-bottom: solid #4A148C;">Prestamos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Libros</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Clientes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Categorias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Editoriales</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Autores</a>
+        </li>
+    </ul>
+
+    <h1 class="mb-4">Lista de Préstamos</h1>
+
+    {%if prestamos %}
+    <table border="1" class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Cliente</th>
+                <th>Libro</th>
+                <th>Categoría</th>
+                <th>Fecha de Préstamo</th>
+                <th>Fecha de Devolución</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prestamo in prestamos %}
+            <tr>
+                <td>{{ prestamo.cliente.nombre }}</td>
+                <td>{{ prestamo.libro.titulo }}</td>
+                <td>{{ prestamo.categoria.nombre }}</td>
+                <td>{{ prestamo.fecha_prestamo }}</td>
+                <td>{{ prestamo.fecha_devolucion }}</td>
+                <td>{{ prestamo.estado|yesno:"Devuelto, <span class='badge bg-warning text-dark'>Pendiente</span>" }}</td>
+                <td>
+                    {% if not prestamo.estado %}
+                    <form action="{%url 'finalizar-prestamo' prestamo.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalFinalizar{{ prestamo.id }}">Finalizar</button>
+                    </form>
+                    {% endif %}
+                    <form action="{%url 'eliminar-prestamo' prestamo.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalEliminar{{ prestamo.id }}">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+
+            <div class="modal fade" id="modalFinalizar{{ prestamo.id }}" tabindex="-1" aria-labelledby="modalFinalizarLabel{{ prestamo.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalFinalizarLabel{{ prestamo.id }}">Confirmar Finalización</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea finalizar el préstamo de: {{ prestamo.cliente.nombre }} - "{{ prestamo.libro.titulo }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{%url 'finalizar-prestamo' prestamo.id}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Confirmar</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalEliminar{{ prestamo.id }}" tabindex="-1" aria-labelledby="modalEliminarLabel{{ prestamo.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEliminarLabel{{ prestamo.id }}">Confirmar Eliminación</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ¿Está seguro que desea eliminar el préstamo de: {{ prestamo.cliente.nombre }} - "{{ prestamo.libro.titulo }}"?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{% url 'eliminar-prestamo' prestamo.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-secondary">Confirmar</button>
+                            </form>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">No hay prestamos confirmados</h4>
+    </div>
+    {% endif %}
+</body>
+</html>
