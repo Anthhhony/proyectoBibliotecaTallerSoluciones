@@ -32,7 +32,8 @@ def registrar_usuario(request):
             )
             db.save()
             return render(request, "templatesApp/inicio.html")
-    return render(request, "templatesApp/registro_inicio.html")
+    data = {"form":form}
+    return render(request, "templatesApp/registro_inicio.html", data)
 
 def lista_prestamos(request):
     libros_disponibles = Libro.objects.filter(disponibilidad=True)
