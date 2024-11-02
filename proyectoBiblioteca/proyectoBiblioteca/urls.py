@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppBiblioteca.views import vista
+from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', vista)
+    path('', vista, name='menu-principal'),
+    path('prestamo/', lista_prestamos, name='lista-prestamo'),
+    path('procesarPrestamo/<int:libro_id>', procesar_prestamo, name='procesar-prestamo'),
+    path('prestamosProcesados/', prestamos_confirmados, name='prestamos-confirmados'),
+    path('finalizarPrestamo/<int:prestamo_id>', finalizar_prestamo, name='finalizar-prestamo'),
+    path('eliminarPrestamo/<int:prestamo_id>', eliminar_prestamo, name='eliminar-prestamo')
 ]
