@@ -23,13 +23,13 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black; border-bottom: solid #4A148C;">Prestamo</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black; border-bottom: solid #4A148C;">Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Clientes</a>
@@ -45,37 +45,24 @@
         </li>
     </ul>
 
-    <h1 class="mb-4">Procesar Préstamo</h1>
-    <form method="post" class="mb-4">
-        {% csrf_token %}
-        <div class="mb-3">
-            <p><strong>Libro:</strong>{{ libro.titulo }}</p>
-        </div>
-        <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente:</label>
-            <select name="cliente" class="form-select" required>
-                {% for cliente in clientes %}
-                <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoría:</label>
-            <select name="categoria" class="form-select" required>
-                {% for categoria in categorias %}
-                <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="fecha_prestamo" class="form-label">Fecha de Préstamo:</label>
-            <input type="date" name="fecha_prestamo" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="fecha_devolucion" class="form-label">Fecha de Devolución:</label>
-            <input type="date" name="fecha_devolucion" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Confirmar Préstamo</button>
-    </form>
+    <div class="container mt-5">
+        <h2 class="mb-4">{{ titulo }} Libro</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="mb-3">
+                <label for="nombre_categoria" class="form-label">Categoría</label>
+                <input type="text" class="form-control" name="nombre_categoria" list="categorias" placeholder="Ingrese o seleccione una categoría">
+                <datalist id="categorias">
+                    {% for categoria in categorias %}
+                    <option value="{{ categoria.nombre }}"></option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar Libro</button>
+            <a href="{% url 'mostrar-libros' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    
 </body>
 </html>

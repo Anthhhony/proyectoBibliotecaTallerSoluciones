@@ -23,13 +23,13 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black; border-bottom: solid #4A148C;">Prestamo</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black; border-bottom: solid #4A148C;">Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Clientes</a>
@@ -43,29 +43,29 @@
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Autores</a>
         </li>
-      </ul>
+    </ul>
 
-<<<<<<< Updated upstream
-      <h1 class="mb-4">Libros disponibles para préstamos</h1>
-      <form class="mb-4" method="get">
-        <div class="input-group">
-=======
-      <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros disponibles para préstamos</h1>
-      {% if libros %}
-      <form class="mb-4" method="get" >
+    <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros registrados en sistema</h1>
+
+    {% if libros %}
+    <form class="mb-4" method="get" >
         <div class="input-group" style="width: 35%; float: right; margin-bottom: 30px; margin-right: 10px;">
->>>>>>> Stashed changes
+            <a href="{%url "agregar-libro" %}" class="btn btn-primary mb-3">Agregar libro</a>
             <input type="text" class="form-control" name="buscar" placeholder="Buscar por título o ISBN">
-            <button type="submit" class="btn btn-primary">Buscar</button>
+            <button type="submit" class="btn btn-primary" style="background-color: #4A148C;"><i class="bi bi-search"></i></button>
         </div>
-      </form>
-      <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+    </form>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark" >
             <tr>
                 <th>ISBN</th>
                 <th>Título</th>
+                <th>Categoria</th>
+                <th>Autor</th>
+                <th>Editorial</th>
+                <th>Año publicación</th>
                 <th>Disponibilidad</th>
-                <th>Acción</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -73,15 +73,18 @@
             <tr>
                 <td>{{ libro.isbn }}</td>
                 <td>{{ libro.titulo }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.editorial }}</td>
+                <td>{{ libro.anio_publicacion }}</td>
                 {% if libro.disponibilidad %}
                 <td><i class="bi bi-check-circle-fill text-success"></i></td>
                 {% else %}
                 <td><i class="bi bi-x-circle-fill text-danger"></i></td>
                 {% endif %}
                 <td>
-                    <form action="{% url 'procesar-prestamo' libro.id %}" method="get">
-                        <button type="submit" class="btn btn-success">Procesar</button>
-                    </form>
+                    <a href="{%url 'editar-libro' libro.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{%url 'eliminar-libro' libro.id %}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
@@ -89,11 +92,10 @@
       </table>
       {% else %}
       <div class="alert alert-warning" role="alert" style="text-align: center; width: 50%; margin: 0 auto;">
-          <h4 class="alert-heading">No hay libros para prestamos</h4>
+          <h4 class="alert-heading">No hay libros registrados en el sistema</h4>
           <i class="bi bi-exclamation-circle" style="font-size: 30px;"></i>
+          <a href="{%url "agregar-libro" %}" class="btn btn-primary mb-3">Agregar libro</a>
       </div>
       {% endif %}
-
-
 </body>
 </html>

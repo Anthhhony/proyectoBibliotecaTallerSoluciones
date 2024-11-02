@@ -1,6 +1,12 @@
 from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
+<<<<<<< Updated upstream
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria
+=======
+from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
+from . import forms
+from AppBiblioteca.forms import LibroForm
+>>>>>>> Stashed changes
 
 # Create your views here.
 
@@ -57,6 +63,52 @@ def eliminar_prestamo(request, prestamo_id):
         prestamo.delete()
         return redirect(prestamos_confirmados)
 
+def mostrar_libros(request):
+    libros = Libro.objects.all()
+    categoria = Categoria.objects.all()
+    return render(request, 'templatesApp/libros.html', {'libros':libros, 'categoria':categoria})
+
+def agregar_libro(request):
+    titulo = 'Agregar'
+    if request.method == 'POST':
+        form = LibroForm(request.POST)
+        if form.is_valid():
+            nombre_categoria = request.POST.get('nombre_categoria')
+            categoria, creada = Categoria.objects.get_or_create(nombre=nombre_categoria)
+            
+            libro = form.save(commit=False)
+            libro.save()
+            libro.categorias.add(categoria)
+            form.save_m2m()
+            return redirect(mostrar_libros)
+    else:
+        form = LibroForm()
+        categorias = Categoria.objects.all()
+    return render(request, 'templatesApp/form_libro.html', {
+        'form': form,
+        'categorias':categorias,
+        'titulo':titulo
+    })
+
+def editar_libro(request, pk):
+    libro = get_object_or_404(Libro, pk=pk)
+    titulo = 'Editar'
+    if request.method == 'POST':
+        form = LibroForm(request.POST, instance=libro)
+        if form.is_valid():
+            form.save()
+            return redirect(mostrar_libros)
+    else:
+        form = LibroForm(instance=libro)
     
+    return render(request, 'templatesApp/form_libro.html', {'form': form, 'libro': libro, 'titulo':titulo})
+
+def eliminar_libro(request, pk):
+    libro = get_object_or_404(Libro, pk=pk)
+    if request.method == 'POST':
+        libro.delete()
+        return redirect(mostrar_libros)
+    
+    return render(request, 'templatesApp/eliminar_confirmacion.html', {'libro': libro})
 
 

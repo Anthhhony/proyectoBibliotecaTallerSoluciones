@@ -28,10 +28,10 @@
           <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Prestamos</a>
+            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Clientes</a>
@@ -69,8 +69,10 @@
                 </a>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-book-half"></i>
-                <h5>Libros</h5>
+                <a href="{%url "mostrar-libros" %}">
+                    <i class="bi bi-book-half"></i>
+                    <h5>Libros</h5>
+                </a>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
                 <i class="bi bi-bookmark"></i>

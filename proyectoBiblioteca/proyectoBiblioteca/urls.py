@@ -12,10 +12,16 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+        # path('editarLibro/<int:pk>', editar_libro, name='editar-libro'),
+    # path('eliminarLibro/<int:pk>', eliminar_libro, name='eliminar-libro')
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< Updated upstream
 from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo
+=======
+from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, login, registrar_usuario, mostrar_libros, agregar_libro, editar_libro, eliminar_libro
+>>>>>>> Stashed changes
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,5 +30,9 @@ urlpatterns = [
     path('procesarPrestamo/<int:libro_id>', procesar_prestamo, name='procesar-prestamo'),
     path('prestamosProcesados/', prestamos_confirmados, name='prestamos-confirmados'),
     path('finalizarPrestamo/<int:prestamo_id>', finalizar_prestamo, name='finalizar-prestamo'),
-    path('eliminarPrestamo/<int:prestamo_id>', eliminar_prestamo, name='eliminar-prestamo')
+    path('eliminarPrestamo/<int:prestamo_id>', eliminar_prestamo, name='eliminar-prestamo'),
+    path('libros/', mostrar_libros, name='mostrar-libros'),
+    path('agregarLibro/', agregar_libro, name='agregar-libro'),
+    path('editarLibro/<int:pk>', editar_libro, name='editar-libro'),
+    path('eliminarLibro/<int:pk>', eliminar_libro, name='eliminar-libro')
 ]

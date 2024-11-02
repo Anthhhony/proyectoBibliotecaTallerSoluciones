@@ -29,7 +29,7 @@
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black; border-bottom: solid #4A148C;">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Clientes</a>
@@ -68,7 +68,7 @@
                 <td>{{ prestamo.categoria.nombre }}</td>
                 <td>{{ prestamo.fecha_prestamo }}</td>
                 <td>{{ prestamo.fecha_devolucion }}</td>
-                <td>{{ prestamo.estado|yesno:"Devuelto, <span class='badge bg-warning text-dark'>Pendiente</span>" }}</td>
+                <td>{{ prestamo.estado|yesno:"Devuelto, Pendiente" }}</td>
                 <td>
                     {% if not prestamo.estado %}
                     <form action="{%url 'finalizar-prestamo' prestamo.id %}" method="post" class="d-inline">
