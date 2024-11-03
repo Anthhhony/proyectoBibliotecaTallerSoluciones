@@ -30,6 +30,17 @@
             <a href="{% url 'mostrar-prestamo' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+    {% elif cliente %}
+    <div class="container mt-5">
+        <h2>Confimar Eliminación</h2>
+        <p>¿Seguro desea eliminar el Cliente: "{{ cliente.nombre }}"</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'mostrar-prestamo' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
     {% endif %}
     
 </body>

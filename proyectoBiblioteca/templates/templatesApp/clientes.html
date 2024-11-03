@@ -29,10 +29,10 @@
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black; border-bottom: solid #4A148C;">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black;">Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black">Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black; border-bottom: solid #4A148C;">Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Categorias</a>
@@ -45,54 +45,40 @@
         </li>
     </ul>
 
-    <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros registrados en sistema</h1>
+    <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Clientes registrados en sistema</h1>
 
-    {% if libros %}
+    {% if cliente %}
     <form class="mb-4" method="get" >
         <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
-            <a href="{%url "agregar-libro" %}" class="btn btn-primary mb-3" style="width: 50%; position:relative; left: 200px; top: 55px; border-radius: 10px;">Agregar libro</a>
-            <input type="text" class="form-control" name="buscar" placeholder="Buscar por título o ISBN" style="width: 90%; position: relative; right: 800px;">
+            <a href="{%url "agregar-cliente" %}" class="btn btn-primary mb-3" style="width: 50%; position:relative; left: 200px; top: 55px; border-radius: 10px;">Agregar cliente</a>
+            <input type="text" class="form-control" name="buscar" placeholder="Buscar por nombre" style="width: 90%; position: relative; right: 800px;">
             <button type="submit" class="btn btn-primary" style="background-color: #4A148C; position:relative; right: 840px;"><i class="bi bi-search"></i></button>
         </div>
     </form>
     <table class="table table-bordered table-striped">
         <thead class="table-dark" >
             <tr>
-                <th>ISBN</th>
-                <th>Título</th>
-                <th>Categoria</th>
-                <th>Autor</th>
-                <th>Editorial</th>
-                <th>Año publicación</th>
-                <th>Disponibilidad</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Correo</th>
+                <th>Registrado por Usuario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            {% for libro in libros %}
+            {% for c in cliente %}
             <tr>
-                <td>{{ libro.isbn }}</td>
-                <td>{{ libro.titulo }}</td>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.direccion }}</td>
+                <td>{{ c.telefono }}</td>
+                <td>{{ c.correo }}</td>
                 <td>
-                    {% for categoria in libro.categorias.all %}
-                        {{ categoria.nombre }}
-                    {% if not forloop.last %}, {% endif %}
-                    {% empty %}
-                        Sin categoria
-                    {% endfor %}
-
+                    {{ c.usuario }}
                 </td>
-                <td>{{ libro.autor }}</td>
-                <td>{{ libro.editorial }}</td>
-                <td>{{ libro.anio_publicacion }}</td>
-                {% if libro.disponibilidad %}
-                <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                {% else %}
-                <td><i class="bi bi-x-circle-fill text-danger"></i></td>
-                {% endif %}
                 <td>
-                    <a href="{%url 'editar-libro' libro.id %}" class="btn btn-warning">Editar</a>
-                    <a href="{%url 'eliminar-libro' libro.id %}" class="btn btn-danger">Eliminar</a>
+                    <a href="{%url 'editar-cliente' c.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{%url 'eliminar-cliente' c.id %}" class="btn btn-danger">Eliminar</a>
                 </td>
             </tr>
             {% endfor %}
@@ -100,9 +86,9 @@
       </table>
       {% else %}
       <div class="alert alert-warning" role="alert" style="text-align: center; width: 50%; margin: 0 auto;">
-          <h4 class="alert-heading">No hay libros registrados en el sistema</h4>
+          <h4 class="alert-heading">No hay clientes registrados en el sistema</h4>
           <i class="bi bi-exclamation-circle" style="font-size: 30px;"></i>
-          <a href="{%url "agregar-libro" %}" class="btn btn-primary mb-3">Agregar libro</a>
+          <a href="{%url "agregar-cliente" %}" class="btn btn-primary mb-3">Agregar Cliente</a>
       </div>
       {% endif %}
 </body>

@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from . import forms
-from AppBiblioteca.forms import LibroForm
+from AppBiblioteca.forms import LibroForm, ClienteForm
 from django.contrib import messages
 
 # Create your views here.
@@ -146,4 +146,42 @@ def eliminar_libro(request, pk):
     
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'libro': libro})
 
+def mostrar_clientes(request):
+    cliente = Cliente.objects.all()
+    return render(request, 'templatesApp/clientes.html', {'cliente':cliente})
 
+def agregar_cliente(request):
+    titulo = 'Agregar'
+    form = ClienteForm()
+    
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            cliente = form.save(commit=False)
+            cliente.save()
+            return redirect(mostrar_clientes)
+        
+    return render(request, 'templatesApp/form_cliente.html', {
+        'form':form,
+        'titulo':titulo
+    })
+
+def editar_cliente(request, pk):
+    titulo = 'Editar'
+    cliente = Cliente.objects.get(id=pk)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST, instance=cliente)
+        if form.is_valid():
+            form.save()
+            return redirect(mostrar_clientes)
+    else:
+        form = ClienteForm(instance=cliente)
+    return render(request, 'templatesApp/form_cliente.html', {'form':form,'cliente':cliente, 'titulo':titulo})
+
+def eliminar_cliente(request, pk):
+    cliente = get_object_or_404(Cliente, pk=pk)
+    if request.method == 'POST':
+        cliente.delete()
+        return redirect(mostrar_clientes)
+    return render(request, 'templateApp/eliminar_confirmacion', {'cliente':cliente})
+            

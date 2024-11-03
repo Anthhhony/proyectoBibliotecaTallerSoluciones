@@ -29,10 +29,10 @@
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black; border-bottom: solid #4A148C;">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black;">Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black">Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black; border-bottom: solid #4A148C;">Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Categorias</a>
@@ -46,21 +46,12 @@
     </ul>
 
     <div class="container mt-5">
-        <h2 class="mb-4">{{ titulo }} Libro</h2>
+        <h2 class="mb-4">{{ titulo }} Cliente</h2>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <div class="mb-3">
-                <label for="nombre_categoria" class="form-label">Categoría</label>
-                <input type="text" class="form-control" name="nombre_categoria" list="categorias" placeholder="Ingrese o seleccione una categoría">
-                <datalist id="categorias">
-                    {% for categoria in categorias %}
-                    <option value="{{ categoria.nombre }}"></option>
-                    {% endfor %}
-                </datalist>
-            </div>
-            <button type="submit" class="btn btn-success">Guardar Libro</button>
-            <a href="{% url 'mostrar-libros' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Guardar Cliente</button>
+            <a href="{% url 'mostrar-clientes' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
     

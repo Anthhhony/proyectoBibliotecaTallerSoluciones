@@ -17,7 +17,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, mostrar_libros, agregar_libro, editar_libro, eliminar_libro, register, buscar_usuario
+from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, mostrar_libros, agregar_libro, editar_libro, eliminar_libro, register, buscar_usuario, mostrar_clientes, agregar_cliente, editar_cliente, eliminar_cliente
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +32,9 @@ urlpatterns = [
     path('libros/', mostrar_libros, name='mostrar-libros'),
     path('agregarLibro/', agregar_libro, name='agregar-libro'),
     path('editarLibro/<int:pk>', editar_libro, name='editar-libro'),
-    path('eliminarLibro/<int:pk>', eliminar_libro, name='eliminar-libro')
+    path('eliminarLibro/<int:pk>', eliminar_libro, name='eliminar-libro'),
+    path('clientes/', mostrar_clientes, name='mostrar-clientes'),
+    path('agregarClientes/', agregar_cliente, name='agregar-cliente'),
+    path('editarCliente/<int:pk>', editar_cliente, name='editar-cliente'),
+    path('eliminarCliente/<int:pk>', eliminar_cliente, name='eliminar-cliente')
 ]

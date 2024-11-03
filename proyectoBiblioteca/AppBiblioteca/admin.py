@@ -4,7 +4,7 @@ from AppBiblioteca.models import Libro, Categoria, Cliente, Prestamo, Usuario
 # Register your models here.
 @admin.register(Libro)
 class LibroAdmin(admin.ModelAdmin):
-    list_display = ('isbn','titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad')
+    list_display = ('isbn','titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad', 'usuario')
     list_filter = ('disponibilidad',)
     search_fields = ('titulo', 'isbn')
 
