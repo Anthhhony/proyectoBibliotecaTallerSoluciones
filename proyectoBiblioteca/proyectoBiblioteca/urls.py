@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo
-from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, login, registrar_usuario, mostrar_libros, agregar_libro, editar_libro, eliminar_libro
+from AppBiblioteca.views import vista, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, mostrar_libros, agregar_libro, editar_libro, eliminar_libro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
