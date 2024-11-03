@@ -19,6 +19,7 @@ section{
     justify-content: center;
     align-items: center;
     padding: 2rem 3rem;
+    box-shadow: 1 1 10 white;
 }
 
 h2{
@@ -41,7 +42,7 @@ h2{
     color: white;
     font-size: 1rem;
     pointer-events: none;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 input:focus ~ label,
@@ -83,5 +84,9 @@ button{
 
 button:hover{
     background-color: gray;
+}
+
+p{
+    color: white;
 }
 

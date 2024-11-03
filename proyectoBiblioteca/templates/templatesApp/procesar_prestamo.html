@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/stylesProcesar_prestamo.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -45,37 +46,48 @@
         </li>
     </ul>
 
-    <h1 class="mb-4">Procesar Préstamo</h1>
-    <form method="post" class="mb-4">
-        {% csrf_token %}
-        <div class="mb-3">
-            <p><strong>Libro:</strong>{{ libro.titulo }}</p>
+    <section class="FormProcesarPrestamo">
+        <h1 class="mb-4" id="Titleform">Procesar Préstamo</h1>
+        
+        <div class="formDivProcesarPrestamo">
+            <div class="LibroTitle">
+                <i class="bi bi-book-fill" style="color:  #4A148C;"></i>
+                <h2 style="color:  #4A148C;">{{ libro.titulo }}</h2>
+            </div>
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="cliente" class="form-label">Cliente:</label>
+                    <select name="cliente" class="form-select" required>
+                        {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Categoría:</label>
+                    <select name="categoria" class="form-select" required>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha_prestamo" class="form-label">Fecha de Préstamo:</label>
+                    <input type="date" name="fecha_prestamo" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fecha_devolucion" class="form-label">Fecha de Devolución:</label>
+                    <input type="date" name="fecha_devolucion" class="form-control" required>
+                </div>  
+                <div class="contButton">
+                    <button type="submit" class="btn btn-primary" style="background-color: #4A148C;">Confirmar Préstamo</button>
+                </div>
+                
+            </form>
         </div>
-        <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente:</label>
-            <select name="cliente" class="form-select" required>
-                {% for cliente in clientes %}
-                <option value="{{ cliente.id }}">{{ cliente.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="categoria" class="form-label">Categoría:</label>
-            <select name="categoria" class="form-select" required>
-                {% for categoria in categorias %}
-                <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="fecha_prestamo" class="form-label">Fecha de Préstamo:</label>
-            <input type="date" name="fecha_prestamo" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="fecha_devolucion" class="form-label">Fecha de Devolución:</label>
-            <input type="date" name="fecha_devolucion" class="form-control" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Confirmar Préstamo</button>
-    </form>
+        
+    </section>
+    
 </body>
 </html>

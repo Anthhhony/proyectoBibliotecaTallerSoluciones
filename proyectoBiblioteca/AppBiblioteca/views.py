@@ -1,7 +1,9 @@
 from datetime import date
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from . import forms
+from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 
@@ -11,29 +13,40 @@ def login(request):
 def vista(request):
     return render(request,"templatesApp/menu.html")
 
-def buscar_usuario(request, rut):
-    usuario = Usuario.objects.filter(rut=rut).first()
+def buscar_usuario(request):
     if request.method == "POST":
+        rut = request.POST.get('rut')
+        usuario = Usuario.objects.filter(rut=rut)
+        print(rut)
+        
         if usuario:
-            data = {"usuario":usuario}
-            return render(request, 'templatesApp/menu.html', data)
+            return render(request, "templatesApp/menu.html")
         
         else:
-            return None
+            messages.error(request, "El R.U.N ingresado no se encuentra registrado.")
+            return redirect('buscar-usuario')
+
+    return render(request, 'templatesApp/inicio.html')
         
-def registrar_usuario(request):
-    form = forms.formularioLogin()
-    if request.method=="POST":
-        form = forms.formularioLogin(request.POST)
-        if form.is_valid():
-            db = Usuario(
-                rut = form.cleaned_data["rut"],
-                contrasena = form.cleaned_data["contraseña"],
-            )
-            db.save()
-            return render(request, "templatesApp/inicio.html")
-    data = {"form":form}
-    return render(request, "templatesApp/registro_inicio.html", data)
+def register(request):
+    if request.method == 'POST':
+        rut = request.POST.get('rut')
+        contrasena = request.POST.get('contrasena')
+
+        # Verificar si el RUT ya existe en la base de datos
+        if Usuario.objects.filter(rut=rut).exists():
+            messages.error(request, "Este R.U.N ya está registrado.")
+            return redirect('registrar-usuario')  # Redirige usando el nombre de la URL
+
+        # Crear el nuevo usuario
+        usuario = Usuario(rut=rut, contrasena=contrasena)
+        usuario.save()
+        messages.success(request, "Usuario registrado exitosamente.")
+        
+        # Redirigir a la página de inicio de sesión o donde prefieras
+        return redirect('login')  # Redirige usando el nombre de la URL
+
+    return render(request, 'templatesApp/registro_inicio.html')
 
 def lista_prestamos(request):
     libros_disponibles = Libro.objects.filter(disponibilidad=True)

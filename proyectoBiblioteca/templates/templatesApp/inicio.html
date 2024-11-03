@@ -11,21 +11,28 @@
 <body class="bodyInicio">
     <div>
         <section>
-            <form method="POST">
+            <form method="POST" action="{% url 'buscar-usuario' %}">
+                {% csrf_token %}
                 <h2 style="color: white;">INICIAR SESION</h2>
-                <div class="inputbox">
+                <div class="inputbox mb-3">
                     <i class="bi bi-key"></i>
-                    <input type="text">
+                    <input type="text" name="rut">
                     <label for="">R.U.N:</label>
                 </div>
-                <div class="inputbox">
+                <div class="inputbox mb-3">
                     <i class="bi bi-lock" class="icon"></i>
                     <input type="password">
                     <label for="">Contraseña:</label>
                 </div>
-                <button type="submit" class="btn btn-light">Ingresar</button>
-                {% if usuario == None %}
-                <p>Si no estas registrado <a href="../registroInicio">Presione aqui</a></p>
+                <button type="submit" class="btn btn-light">Verificar</button>
+
+                <p style="color: white; padding-top: 20px;">Si no estas registrado <a href="../register">Presione aqui</a></p>
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 {% endif %}
             </form>
         </section>
