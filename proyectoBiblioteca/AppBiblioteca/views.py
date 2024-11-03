@@ -1,12 +1,9 @@
 from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
-<<<<<<< Updated upstream
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria
-=======
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from . import forms
 from AppBiblioteca.forms import LibroForm
->>>>>>> Stashed changes
 
 # Create your views here.
 
