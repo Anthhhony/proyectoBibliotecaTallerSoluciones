@@ -4,8 +4,45 @@ from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from . import forms
 from AppBiblioteca.forms import LibroForm
+from django.contrib import messages
 
 # Create your views here.
+
+def login(request):
+    return render(request, 'templatesApp/inicio.html')
+
+def buscar_usuario(request):
+    if request.method == 'POST':
+        rut = request.POST.get('rut')
+        usuario = Usuario.objects.filter(rut=rut)
+        print(rut)
+        
+        if usuario:
+            return render(request, 'templatesApp/menu.html')
+        else:
+            messages.error(request, 'El R.U.N ingresado no se encuentra registrado.')
+            return redirect(buscar_usuario)
+    return render(request, 'templatesApp/inicio.html')
+
+def register(request):
+    if request.method == 'POST':
+        rut = request.POST.get('rut')
+        contrasena = request.POST.get('contrasena')
+
+        # Verificar si el RUT ya existe en la base de datos
+        if Usuario.objects.filter(rut=rut).exists():
+            messages.error(request, "Este R.U.N ya está registrado.")
+            return redirect(register)  # Redirige usando el nombre de la URL
+
+        # Crear el nuevo usuario
+        usuario = Usuario(rut=rut, contrasena=contrasena)
+        usuario.save()
+        messages.success(request, "Usuario registrado exitosamente.")
+        
+        # Redirigir a la página de inicio de sesión o donde prefieras
+        return redirect(login)  # Redirige usando el nombre de la URL
+
+    return render(request, 'templatesApp/registro_inicio.html')
 
 def vista(request):
     return render(request,"templatesApp/menu.html")
@@ -59,6 +96,7 @@ def eliminar_prestamo(request, prestamo_id):
     if request.method == 'POST':
         prestamo.delete()
         return redirect(prestamos_confirmados)
+    return render(request, 'templatesApp/eliminar_confirmacion.html', {'prestamo':prestamo})
 
 def mostrar_libros(request):
     libros = Libro.objects.all()

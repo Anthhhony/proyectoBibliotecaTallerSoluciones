@@ -10,15 +10,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 <body>
+    {% if libro %}
     <div class="container mt-5">
         <h2>Confirmar Eliminación</h2>
-        <p>¿Seguro desea eliminar el libro "{{ libro.titulo }}"?</p>
+        <p>¿Seguro desea eliminar el libro: "{{ libro.titulo }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Sí, eliminar</button>
             <a href="{% url 'mostrar-libros' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+    {% elif prestamo %}
+    <div class="container mt-5">
+        <h2>Confimar Eliminación</h2>
+        <p>¿Seguro desea eliminar el prestamo de: "{{ prestamo.cliente }} y {{ prestamo.libro }}"</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'mostrar-prestamo' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    {% endif %}
     
 </body>
 </html>
