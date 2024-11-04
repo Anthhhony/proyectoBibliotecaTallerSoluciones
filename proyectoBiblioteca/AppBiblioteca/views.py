@@ -4,6 +4,7 @@ from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Us
 from . import forms
 from django.contrib import messages
 from django.urls import reverse
+from django.contrib.auth.hashers import make_password, check_password
 
 # Create your views here.
 
@@ -16,37 +17,43 @@ def vista(request):
 def buscar_usuario(request):
     if request.method == "POST":
         rut = request.POST.get('rut')
-        usuario = Usuario.objects.filter(rut=rut)
-        print(rut)
+        contrasena = request.POST.get('contrasena')
         
-        if usuario:
+        usuario = Usuario.objects.filter(rut=rut).first()
+        
+        if usuario and check_password(contrasena, usuario.contrasena):
             return render(request, "templatesApp/menu.html")
-        
         else:
-            messages.error(request, "El R.U.N ingresado no se encuentra registrado.")
+            messages.error(request, "R.U.N o contraseña incorrecta.")
             return redirect('buscar-usuario')
+            
+    return render(request, "templatesApp/inicio.html")
 
-    return render(request, 'templatesApp/inicio.html')
         
 def register(request):
     if request.method == 'POST':
         rut = request.POST.get('rut')
         contrasena = request.POST.get('contrasena')
+        password2 = request.POST['password2']
+
+        if contrasena != password2:
+            messages.error(request, "Las contraseñas no coinciden.")
+            return redirect('registrar-usuario')
 
         # Verificar si el RUT ya existe en la base de datos
         if Usuario.objects.filter(rut=rut).exists():
             messages.error(request, "Este R.U.N ya está registrado.")
-            return redirect('registrar-usuario')  # Redirige usando el nombre de la URL
+            return redirect('registrar-usuario')
 
-        # Crear el nuevo usuario
-        usuario = Usuario(rut=rut, contrasena=contrasena)
-        usuario.save()
-        messages.success(request, "Usuario registrado exitosamente.")
-        
-        # Redirigir a la página de inicio de sesión o donde prefieras
-        return redirect('login')  # Redirige usando el nombre de la URL
+        # Crear el nuevo usuario con contraseña encriptada
+        if not Usuario.objects.filter(rut=rut).exists():
+            usuario = Usuario(rut=rut, contrasena=make_password(contrasena))
+            usuario.save()
+            messages.success(request, "Usuario registrado exitosamente.")
+            return redirect('buscar-usuario')
 
     return render(request, 'templatesApp/registro_inicio.html')
+
 
 def lista_prestamos(request):
     libros_disponibles = Libro.objects.filter(disponibilidad=True)

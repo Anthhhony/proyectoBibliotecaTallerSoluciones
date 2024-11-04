@@ -20,6 +20,19 @@
                     <input type="text" name="rut" required>
                     <label for="rut">R.U.N:</label>
                 </div>
+                
+                
+                <div class="inputbox mb-3">
+                    <i class="bi bi-lock"></i>
+                    <input type="password" name="contrasena" required>
+                    <label for="contrasena">Contraseña:</label>
+                </div>
+
+                <div class="inputbox mb-3">
+                    <i class="bi bi-lock-fill"></i>
+                    <input type="password" name="password2" required>
+                    <label for="password2">Confirmar contraseña:</label>
+                </div>
                 {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-danger" role="alert">
@@ -27,12 +40,6 @@
                     </div>
                 {% endfor %}
                 {% endif %}
-                
-                <div class="inputbox mb-3">
-                    <i class="bi bi-lock"></i>
-                    <input type="password" name="contrasena" required>
-                    <label for="contrasena">Contraseña:</label>
-                </div>
                 
                 <button type="submit" class="btn btn-light">Registrar</button>
             </form>
