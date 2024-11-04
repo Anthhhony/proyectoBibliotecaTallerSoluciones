@@ -15,7 +15,7 @@ class FormularioRegister(forms.ModelForm):
 class LibroForm(forms.ModelForm):
     class Meta:
         model = Libro
-        fields = ['isbn', 'titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad', 'usuario', 'categorias']
+        fields = ['isbn', 'titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad', 'usuario']
 
 class ClienteForm(forms.ModelForm):
     class Meta:
