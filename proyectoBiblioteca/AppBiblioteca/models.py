@@ -11,6 +11,7 @@ class Usuario(models.Model):
 class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
     
+    
     def __str__(self):
         return self.nombre
 
@@ -32,6 +33,7 @@ class Libro(models.Model):
     anio_publicacion = models.BigIntegerField()
     disponibilidad = models.BooleanField(default=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
+    categorias = models.ManyToManyField(Categoria, related_name='libros')
     
     def __str__(self):
         return self.titulo
