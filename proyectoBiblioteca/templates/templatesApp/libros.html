@@ -64,7 +64,6 @@
                 <th>Autor</th>
                 <th>Editorial</th>
                 <th>Año publicación</th>
-                <th>Disponibilidad</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -85,11 +84,6 @@
                 <td>{{ libro.autor }}</td>
                 <td>{{ libro.editorial }}</td>
                 <td>{{ libro.anio_publicacion }}</td>
-                {% if libro.disponibilidad %}
-                <td><i class="bi bi-check-circle-fill text-success"></i></td>
-                {% else %}
-                <td><i class="bi bi-x-circle-fill text-danger"></i></td>
-                {% endif %}
                 <td>
                     <a href="{%url 'editar-libro' libro.id %}" class="btn btn-warning">Editar</a>
                     <a href="{%url 'eliminar-libro' libro.id %}" class="btn btn-danger">Eliminar</a>

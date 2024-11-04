@@ -46,8 +46,7 @@
       </ul>
 
       <form class="mb-4" method="get">
-        <div class="input-group">
-      <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px; position: relative; left: 500px;">Libros disponibles para préstamos</h1>
+      <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros disponibles para préstamos</h1>
       {% if libros %}
       <form class="mb-4" method="get" >
         <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
@@ -76,7 +75,7 @@
                 {% endif %}
                 <td>
                     <form action="{% url 'procesar-prestamo' libro.id %}" method="get">
-                        <button type="submit" class="btn btn-success">Procesar</button>
+                        <button type="submit" class="btn btn-success">Prestar</button>
                     </form>
                 </td>
             </tr>

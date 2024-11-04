@@ -84,47 +84,7 @@
                 </td>
             </tr>
 
-            <div class="modal fade" id="modalFinalizar{{ prestamo.id }}" tabindex="-1" aria-labelledby="modalFinalizarLabel{{ prestamo.id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalFinalizarLabel{{ prestamo.id }}">Confirmar Finalización</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Está seguro que desea finalizar el préstamo de: {{ prestamo.cliente.nombre }} - "{{ prestamo.libro.titulo }}"?
-                        </div>
-                        <div class="modal-footer">
-                            <form action="{%url 'finalizar-prestamo' prestamo.id}" method="post" class="d-inline">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Confirmar</button>
-                            </form>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modalEliminar{{ prestamo.id }}" tabindex="-1" aria-labelledby="modalEliminarLabel{{ prestamo.id }}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="modalEliminarLabel{{ prestamo.id }}">Confirmar Eliminación</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ¿Está seguro que desea eliminar el préstamo de: {{ prestamo.cliente.nombre }} - "{{ prestamo.libro.titulo }}"?
-                        </div>
-                        <div class="modal-footer">
-                            <form action="{% url 'eliminar-prestamo' prestamo.id %}" method="post" class="d-inline">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-secondary">Confirmar</button>
-                            </form>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            
         {% endfor %}
         </tbody>
     </table>
