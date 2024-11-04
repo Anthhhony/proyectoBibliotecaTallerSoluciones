@@ -80,9 +80,11 @@ WSGI_APPLICATION = 'proyectoBiblioteca.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'BibliotecaDB5',
-        'USER': 'root',
-        'PASSWORD': ''
+        'NAME': 'db_biblioteca',
+        'USER': 'biblioteca',
+        'PASSWORD': 'biblioteca123',
+        'HOST':'id-db-biblioteca0.c5eoo4euss03.us-east-2.rds.amazonaws.com',
+        'PORT': '3306'
     }
 }
 
