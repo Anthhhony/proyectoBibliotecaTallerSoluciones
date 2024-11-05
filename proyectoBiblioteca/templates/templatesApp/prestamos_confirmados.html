@@ -24,7 +24,7 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestar Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black; border-bottom: solid #4A148C;">Prestamos</a>
@@ -33,7 +33,7 @@
             <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black">Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#" style="color: black">Categorias</a>
@@ -74,12 +74,12 @@
                     {% if not prestamo.estado %}
                     <form action="{%url 'finalizar-prestamo' prestamo.id %}" method="post" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalFinalizar{{ prestamo.id }}">Finalizar</button>
+                        <button type="submit" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalFinalizar{{ prestamo.id }}">Finalizar</button>
                     </form>
                     {% endif %}
                     <form action="{%url 'eliminar-prestamo' prestamo.id %}" method="post" class="d-inline">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalEliminar{{ prestamo.id }}">Eliminar</button>
+                        <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar{{ prestamo.id }}">Eliminar</button>
                     </form>
                 </td>
             </tr>
