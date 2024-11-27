@@ -196,7 +196,7 @@ def eliminar_cliente(request, pk):
     if request.method == 'POST':
         cliente.delete()
         return redirect(mostrar_clientes)
-    return render(request, 'templateApp/eliminar_confirmacion.html', {'cliente':cliente})
+    return render(request, 'templatesApp/eliminar_confirmacion.html', {'cliente':cliente})
 
     
 

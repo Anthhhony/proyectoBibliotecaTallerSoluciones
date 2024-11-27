@@ -22,8 +22,8 @@ class Categoria(models.Model):
         return self.nombre
 
 class Cliente(models.Model):
-    nombre =  models.CharField(max_length=50, validators=[MinValueValidator(3)])
-    direccion = models.CharField(max_length=100, validators=[MinValueValidator(3)])
+    nombre =  models.CharField(max_length=50, validators=[MinLengthValidator(3)])
+    direccion = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
     telefono = models.CharField(
         max_length=15,
         validators=[RegexValidator(regex=r'^(?:\+56|56)?9\d{8}$', message='Telefono incorrecto. Ejemplo: +56912345678')]
