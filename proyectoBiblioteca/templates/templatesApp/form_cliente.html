@@ -23,7 +23,7 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestamo</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestar libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
@@ -45,14 +45,18 @@
         </li>
     </ul>
 
-    <div class="container mt-5">
-        <h2 class="mb-4">{{ titulo }} Cliente</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-success">Guardar Cliente</button>
-            <a href="{% url 'mostrar-clientes' %}" class="btn btn-secondary">Cancelar</a>
-        </form>
+    <div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 100vh;">
+        <div class="card p-4" style="width: 100%; max-width: 500px;">
+            <h2 class="mb-4 text-center">{{ titulo }} Cliente</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" class="btn btn-success">Guardar Cliente</button>
+                    <a href="{% url 'mostrar-clientes' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
     </div>
     
 </body>
