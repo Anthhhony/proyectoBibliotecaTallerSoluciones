@@ -27,13 +27,16 @@
                 <button type="submit" class="btn btn-light">Verificar</button>
 
                 <p style="color: white; padding-top: 20px;">Si no estas registrado <a href="../register">Presione aqui</a></p>
-                {% if messages %}
+            {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert 
+                        {% if message.level == 40 %}alert-danger
+                        {% elif message.level == 25 %}alert-success
+                        {% else %}alert-info{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
-                {% endif %}
+            {% endif %}
             </form>
         </section>
     </div>

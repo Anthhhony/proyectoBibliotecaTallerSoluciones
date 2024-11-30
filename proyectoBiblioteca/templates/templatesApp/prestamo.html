@@ -35,25 +35,25 @@
             <a class="nav-link" href="#" style="color: black">Clientes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Categorias</a>
+            <a class="nav-link" href="{%url "mostrar-categorias" %}" style="color: black;">Categorias</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Editoriales</a>
+            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="color: black">Editoriales</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Autores</a>
+            <a class="nav-link" href="{% url 'mostrar-autores' %}" style="color: black">Autores</a>
         </li>
       </ul>
 
       <form class="mb-4" method="get">
       <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros disponibles para préstamos</h1>
       {% if libros %}
-      <form class="mb-4" method="get" >
-        <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
-            <input type="text" class="form-control" name="buscar" placeholder="Buscar por título o ISBN" style="width: 90%; position: relative; right: 150px; top: 100px;">
-            <button type="submit" class="btn btn-primary" style="background-color: #4A148C; position:relative; right: 150px; top:100px"><i class="bi bi-search"></i></button>
-        </div>
-    </form>
+        <form class="mb-4" method="get" >
+            <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
+                <input type="text" class="form-control rounded-pill" name="buscar" placeholder="Buscar por título o ISBN" value="{{ request.GET.buscar|default:'' }}" style="border-radius: 30px; width: 100%; height: 45px;position: relative; right: 800px; outline:none; box-shadow: none;">
+                <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #4A148C; position:relative; bottom:40px; right:110px; width: 10%;"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
       <table class="table table-bordered table-striped" style="position: relative; top: 100px;">
         <thead class="table-dark">
             <tr>
