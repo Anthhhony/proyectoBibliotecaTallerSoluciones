@@ -33,15 +33,21 @@
                     <input type="password" name="password2" required>
                     <label for="password2">Confirmar contraseña:</label>
                 </div>
-                {% if messages %}
+            
+            {% if messages %}
                 {% for message in messages %}
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert 
+                        {% if message.level == 40 %}alert-danger
+                        {% elif message.level == 25 %}alert-success
+                        {% else %}alert-info{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
-                {% endif %}
+            {% endif %}
                 
                 <button type="submit" class="btn btn-light">Registrar</button>
+                <br/><br/>
+                <button type="button" class="btn btn-light"><a class="link-body-emphasis link-offset-2 link-underline link-underline-opacity-0" href="{%url 'buscar-usuario'%}"> Volver </a></button>
             </form>
         </section>
     </div>

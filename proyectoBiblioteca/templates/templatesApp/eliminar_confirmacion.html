@@ -40,7 +40,16 @@
             <a href="{% url 'lista-prestamo' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
-
+    {% elif categoria %}
+    <div class="container mt-5">
+        <h2>Confimar Eliminación</h2>
+        <p>¿Seguro desea eliminar la categoria: "{{ categoria.nombre }}"</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+            <a href="{% url 'mostrar-categorias' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
     {% endif %}
     
 </body>

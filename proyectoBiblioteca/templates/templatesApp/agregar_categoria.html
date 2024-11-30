@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/sylesformlibro.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
@@ -24,19 +23,19 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestar libros</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestar Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black; border-bottom: solid #4A148C;">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black;">Libros</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black">Clientes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-categorias" %}" style="color: black;">Categorias</a>
+            <a class="nav-link" href="{%url "mostrar-categorias" %}" style="color: black; border-bottom: solid #4A148C;">Categorias</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="color: black">Editoriales</a>
@@ -45,29 +44,16 @@
             <a class="nav-link" href="{% url 'mostrar-autores' %}" style="color: black">Autores</a>
         </li>
     </ul>
-
-    <div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 100vh;">
-        <div class="card p-4" style="width: 100%; max-width: 500px;">
-            <h2 class="mb-4 text-center">{{ titulo }} Libro</h2>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <div class="mb-3">
-                    <label for="nombre_categoria" class="form-label">Categoría</label>
-                    <input type="text" class="form-control" name="nombre_categoria" list="categorias" placeholder="Ingrese o seleccione una categoría">
-                    <datalist id="categorias">
-                        {% for categoria in categorias %}
-                        <option value="{{ categoria.nombre }}"></option>
-                        {% endfor %}
-                    </datalist>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success">Guardar Libro</button>
-                    <a href="{% url 'mostrar-libros' %}" class="btn btn-secondary">Cancelar</a>
-                </div>
-            </form>
+    <h1>Agregar Categoría</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>
-    </div>
-    
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{% url 'mostrar-categorias' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
 </body>
 </html>

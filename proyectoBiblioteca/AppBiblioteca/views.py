@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from AppBiblioteca.forms import ClienteForm, LibroForm
 from . import forms
+from django.db.models import Q, Count
 from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.hashers import make_password, check_password
@@ -58,7 +59,14 @@ def register(request):
 
 def lista_prestamos(request):
     libros_disponibles = Libro.objects.filter(disponibilidad=True)
-    return render(request, 'templatesApp/prestamo.html', {'libros':libros_disponibles})
+    query = request.GET.get('buscar', '').strip()  # 'buscar' es el nombre del input en el template
+
+    if query:  # Si hay una búsqueda, filtrar por nombre o ISBN
+        libros_disponibles = libros_disponibles.filter(
+            Q(titulo__icontains=query) | Q(isbn__icontains=query)
+        )
+
+    return render(request, 'templatesApp/prestamo.html', {'libros': libros_disponibles})
 
 def procesar_prestamo(request, libro_id):
     libro = get_object_or_404(Libro, id=libro_id)
@@ -111,12 +119,19 @@ def eliminar_prestamo(request, prestamo_id):
     return render(request, "templatesApp/eliminar_confirmacion.html", {"prestamo":prestamo})
     
 def mostrar_libros(request):
-    libros = Libro.objects.all()
+    query = request.GET.get('buscar', '')
+    if query:
+        libros = Libro.objects.filter(
+            Q(titulo__icontains=query) | Q(isbn__icontains=query)
+        )
+    else:
+        libros = Libro.objects.all()
     categoria = Categoria.objects.all()
     return render(request, 'templatesApp/libros.html', {'libros':libros, 'categoria':categoria})
 
 def agregar_libro(request):
     titulo = 'Agregar'
+    categorias = Categoria.objects.all()
     if request.method == 'POST':
         form = LibroForm(request.POST)
         if form.is_valid():
@@ -131,7 +146,7 @@ def agregar_libro(request):
             return redirect(mostrar_libros)
     else:
         form = LibroForm()
-        categorias = Categoria.objects.all()
+
     return render(request, 'templatesApp/form_libro.html', {
         'form': form,
         'categorias':categorias,
@@ -160,8 +175,17 @@ def eliminar_libro(request, pk):
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'libro': libro})
 
 def mostrar_clientes(request):
-    cliente = Cliente.objects.all()
-    return render(request, 'templatesApp/clientes.html', {'cliente':cliente})
+    query = request.GET.get('buscarCliente', '').strip()
+    if query:
+        # Filtrar clientes por nombre o RUT
+        cliente = Cliente.objects.filter(
+            Q(nombre__icontains=query) | Q(usuario__rut__icontains=query)
+        )
+    else:
+        # Mostrar todos los clientes si no hay búsqueda
+        cliente = Cliente.objects.all()
+    
+    return render(request, 'templatesApp/clientes.html', {'cliente': cliente})
 
 def agregar_cliente(request):
     titulo = 'Agregar'
@@ -198,6 +222,48 @@ def eliminar_cliente(request, pk):
         return redirect(mostrar_clientes)
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'cliente':cliente})
 
+
+def mostrar_categorias(request):
+    categorias = Categoria.objects.annotate(cantidad_libros=Count('libros'))
+    return render(request, 'templatesApp/categorias.html', {'categorias': categorias})
+
+def agregar_categoria(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        descripcion = request.POST.get('descripcion')
+        if nombre:  # Validación básica
+            Categoria.objects.create(nombre=nombre)
+            return redirect('mostrar-categorias')
+    return render(request, 'templatesApp/agregar_categoria.html')
+
+def eliminar_categoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    if request.method == 'POST':
+        categoria.delete()
+        return redirect('mostrar-categorias')
+    return render(request, 'templatesApp/eliminar_confirmacion.html', {'categoria':categoria})
+
+def mostrar_editoriales(request):
+    query = request.GET.get('q', '')  # Obtener el término de búsqueda
+    editoriales = (
+        Libro.objects.filter(editorial__icontains=query) if query else Libro.objects.all()
+    ).values('editorial').annotate(cantidad=Count('id')).order_by('editorial')
     
+    return render(request, 'templatesApp/editoriales.html', {
+        'editoriales': editoriales,
+        'query': query,
+    })
+
+def mostrar_autores(request):
+    query = request.GET.get('q', '')  # Obtener el término de búsqueda
+    autores = (
+        Libro.objects.filter(autor__icontains=query) if query else Libro.objects.all()
+    ).values('autor').annotate(cantidad=Count('id')).order_by('autor')
+    
+    return render(request, 'templatesApp/autores.html', {
+        'autores': autores,
+        'query': query,
+    })
+
 
 

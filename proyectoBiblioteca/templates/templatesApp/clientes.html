@@ -35,24 +35,24 @@
             <a class="nav-link" href="{%url "mostrar-clientes" %}" style="color: black; border-bottom: solid #4A148C;">Clientes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Categorias</a>
+            <a class="nav-link" href="{%url "mostrar-categorias" %}" style="color: black;">Categorias</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Editoriales</a>
+            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="color: black">Editoriales</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Autores</a>
+            <a class="nav-link" href="{% url 'mostrar-autores' %}" style="color: black">Autores</a>
         </li>
     </ul>
 
     <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Clientes registrados en sistema</h1>
 
     {% if cliente %}
-    <form class="mb-4" method="get" >
+    <form class="mb-4" method="get">
         <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
-            <a href="{%url "agregar-cliente" %}" class="btn btn-primary mb-3" style="width: 50%; position:relative; left: 200px; top: 55px; border-radius: 10px;">Agregar cliente</a>
-            <input type="text" class="form-control" name="buscar" placeholder="Buscar por nombre" style="width: 90%; position: relative; right: 800px;">
-            <button type="submit" class="btn btn-primary" style="background-color: #4A148C; position:relative; right: 840px;"><i class="bi bi-search"></i></button>
+            <a href="{% url 'agregar-cliente' %}" class="btn btn-primary mb-3" style="width: 50%; position:relative; left: 200px; top: 55px; border-radius: 10px;">Agregar Cliente</a>
+            <input type="text" class="form-control rounded-pill" name="buscarCliente" placeholder="Buscar por nombre" value="{{ request.GET.buscarCliente|default:'' }}" style="border-radius: 30px; width: 100%; height: 45px;position: relative; right: 800px; outline:none; box-shadow: none;">
+            <button type="submit" class="btn btn-primary rounded-pill" style="background-color: #4A148C; position:relative; bottom:40px; right:110px; width: 10%;"><i class="bi bi-search"></i></button>
         </div>
     </form>
     <table class="table table-bordered table-striped">
