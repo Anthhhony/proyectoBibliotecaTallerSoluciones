@@ -127,6 +127,10 @@ def finalizar_prestamo(request, prestamo_id):
     if request.method == 'POST':
         prestamo.estado = True
         prestamo.save()
+        
+        libro = prestamo.libro
+        libro.disponibilidad = True
+        libro.save()
 
         return redirect(prestamos_confirmados)
 
@@ -150,17 +154,11 @@ def mostrar_libros(request):
 
 def agregar_libro(request):
     titulo = 'Agregar'
-    categorias = Categoria.objects.all()
     if request.method == 'POST':
         form = LibroForm(request.POST)
         if form.is_valid():
-            nombre_categoria = request.POST.get('nombre_categoria')
-            categoria, creada = Categoria.objects.get_or_create(nombre=nombre_categoria)
-            
-            
             libro = form.save(commit=False)
             libro.save()
-            libro.categorias.add(categoria)
             form.save_m2m()
             return redirect(mostrar_libros)
     else:
@@ -168,7 +166,6 @@ def agregar_libro(request):
 
     return render(request, 'templatesApp/form_libro.html', {
         'form': form,
-        'categorias':categorias,
         'titulo':titulo
     })
 
@@ -178,12 +175,16 @@ def editar_libro(request, pk):
     if request.method == 'POST':
         form = LibroForm(request.POST, instance=libro)
         if form.is_valid():
-            form.save()
-            return redirect(mostrar_libros)
+            libro = form.save(commit=False)  # Guarda el libro sin aplicar las relaciones ManyToMany aún
+            libro.save()
+            # Actualizar las categorías
+            categorias = form.cleaned_data.get('categorias')  # Obtener las categorías seleccionadas
+            libro.categorias.set(categorias)  # Actualizar las categorías relacionadas
+            return redirect('mostrar-libros')
     else:
         form = LibroForm(instance=libro)
     
-    return render(request, 'templatesApp/form_libro.html', {'form': form, 'libro': libro, 'titulo':titulo})
+    return render(request, 'templatesApp/form_libro.html', {'form': form, 'libro': libro, 'titulo': titulo})
 
 def eliminar_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)

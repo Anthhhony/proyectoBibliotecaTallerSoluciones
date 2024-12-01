@@ -1,5 +1,5 @@
 from django import forms
-from AppBiblioteca.models import Usuario, Libro, Cliente
+from AppBiblioteca.models import Usuario, Libro, Cliente, Categoria
 
 class formularioLogin(forms.Form):
     rut = forms.CharField(max_length=12)
@@ -13,6 +13,12 @@ class FormularioRegister(forms.ModelForm):
         fields = "__all__"
         
 class LibroForm(forms.ModelForm):
+    categorias = forms.ModelMultipleChoiceField(
+        queryset=Categoria.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
+        required=True
+    )
+
     class Meta:
         model = Libro
         fields = ['isbn', 'titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad', 'usuario']
