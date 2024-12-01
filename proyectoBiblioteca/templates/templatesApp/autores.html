@@ -41,13 +41,13 @@
             <a class="nav-link" href="{% url 'mostrar-editoriales' %}" >Editoriales</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'mostrar-autores' %}" style="border-bottom: solid #255dc5;">Autores</a>
+            <a class="nav-link" href="{% url 'mostrar-autores' %}" style="border-bottom: solid #255dc5; font-weight: bold;">Autores</a>
         </li>
     </ul>
     <div class="container mt-4">
-        <h1>Lista de Autores</h1>
+        <h1 style="color: #327aff; text-align: center; padding: 20px;" >Lista de Autores</h1>
         <form method="get" class="mb-3">
-            <input type="text" name="q" class="form-control" placeholder="Buscar autor..." value="{{ query }}">
+            <input type="text" name="q" class="form-control" placeholder="Buscar autor..." value="{{ query }}" style=" box-shadow: 0 0 3px #327aff;">
         </form>
         <table class="table table-striped">
             <thead>

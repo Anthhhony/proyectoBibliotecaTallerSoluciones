@@ -1,4 +1,7 @@
 from datetime import date
+from django.db.models.signals import pre_save, post_save, pre_delete, post_delete
+from django.core.mail import send_mail
+from django.dispatch import receiver
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from AppBiblioteca.models import Cliente, Libro, models, Prestamo, Categoria, Usuario
 from AppBiblioteca.forms import ClienteForm, LibroForm
@@ -194,6 +197,8 @@ def eliminar_libro(request, pk):
     
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'libro': libro})
 
+
+
 def mostrar_clientes(request):
     query = request.GET.get('buscarCliente', '').strip()
     if query:
@@ -206,6 +211,8 @@ def mostrar_clientes(request):
         cliente = Cliente.objects.all()
     
     return render(request, 'templatesApp/clientes.html', {'cliente': cliente})
+
+
 
 def agregar_cliente(request):
     titulo = 'Agregar'

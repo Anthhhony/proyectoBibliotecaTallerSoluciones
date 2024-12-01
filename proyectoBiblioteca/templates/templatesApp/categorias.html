@@ -36,7 +36,7 @@
                 <a class="nav-link" href="{%url "mostrar-clientes" %}" >Clientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{%url "mostrar-categorias" %}" style="border-bottom: solid #255dc5;">Categorias</a>
+                <a class="nav-link" href="{%url "mostrar-categorias" %}" style="border-bottom: solid #255dc5; font-weight: bold;">Categorias</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'mostrar-editoriales' %}" >Editoriales</a>
@@ -45,7 +45,7 @@
                 <a class="nav-link" href="{% url 'mostrar-autores' %}" >Autores</a>
             </li>
         </ul>
-    <h1 class="text-center">Categorías</h1>
+    <h1 class="text-center" style="color: #327aff; padding: 20px;">Categorías</h1>
     <a href="{% url 'agregar-categoria' %}" class="btn btn-primary mb-3" style="position:relative; left: 385px; width: 50%;">Agregar Categoría</a>
 
     <table class="table table-bordered table-striped">

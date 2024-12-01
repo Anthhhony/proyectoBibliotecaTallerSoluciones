@@ -32,7 +32,7 @@
             <a class="nav-link" href="{%url "mostrar-libros" %}" >Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="border-bottom: solid #255dc5;">Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" style="font-weight: bold; border-bottom: solid #255dc5;">Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "mostrar-categorias" %}" >Categorias</a>
@@ -44,10 +44,10 @@
             <a class="nav-link" href="{% url 'mostrar-autores' %}" >Autores</a>
         </li>
     </ul>
-
-    <div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 100vh;">
-        <div class="card p-4" style="width: 100%; max-width: 500px;">
-            <h2 class="mb-4 text-center">{{ titulo }} Cliente</h2>
+    <h1 class="mb-4 text-center" style="color: #327aff; padding-top: 20px;">{{ titulo }} Cliente</h1>
+    <div class="container d-flex justify-content-center align-items-center mt-5" >
+        <div class="card p-4" style="width: 100%; max-width: 500px;  ">
+            
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}

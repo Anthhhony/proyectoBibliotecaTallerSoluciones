@@ -44,15 +44,17 @@
             <a class="nav-link" href="{% url 'mostrar-autores' %}" >Autores</a>
         </li>
     </ul>
-    <h1>Agregar Categoría</h1>
+    <h1 style="color: #327aff; text-align: center; padding: 20px;">Agregar Categoría</h1>
     <form method="POST">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        <div class="mb-3" style="width: 60%; text-align: center; margin: 0 auto;">
+            <label for="nombre" class="form-label" style="font-size: 20px; color: #327aff;" >Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"  required style=" box-shadow: 0 0 3px #327aff;" placeholder="Nombre categoria..."> <br>
+            <button type="submit" class="btn btn-success">Guardar</button>
+            <a href="{% url 'mostrar-categorias' %}" class="btn btn-secondary">Cancelar</a>
         </div>
-        <button type="submit" class="btn btn-success">Guardar</button>
-        <a href="{% url 'mostrar-categorias' %}" class="btn btn-secondary">Cancelar</a>
+        
+        
     </form>
 
 </body>

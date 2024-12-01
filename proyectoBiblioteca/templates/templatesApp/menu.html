@@ -48,8 +48,8 @@
       </ul>
     <!-- Banner -->
     <div class="banner">
-        <h1 style="color: #ffffff; font-size: 40px;">NUEVA WEB DE LA BIBLIOTECA</h1>
-        <p style="color: #ffffff; font-size: 24px;">Bienvenido este es el nuevo sistema web de la biblioteca de Caldera, esta es la primera version, por lo tanto se mejorara con el tiempo</p>
+        <h1 style="color: #ffffff; font-size: 40px; text-shadow: 1px, 1px, 5px, black;">NUEVA WEB DE LA BIBLIOTECA</h1>
+        <p style="color: #ffffff; font-size: 24px; text-shadow: 1px, 1px, 5px, black;">Bienvenido este es el nuevo sistema web de la biblioteca de Caldera, esta es la primera version, por lo tanto se mejorara con el tiempo</p>
     </div>
     
 
@@ -78,23 +78,37 @@
                 <h5>Libros</h5>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-bookmark"></i>
+                <a href="{%url "mostrar-categorias" %}">
+                    <i class="bi bi-bookmark"></i>
+                </a>
+                
                 <h5>Categorias</h5>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-bookmark"></i>
+                <a href="{%url "mostrar-editoriales" %}">
+                    <i class="bi bi-bookmark"></i>
+                </a>
                 <h5>Editoriales</h5>
             </div>
             <div class="col-md-3 service" style="cursor: pointer;">
-                <i class="bi bi-bookmark"></i>
+                <a href="{%url "mostrar-autores" %}">
+                    <i class="bi bi-bookmark"></i>
+                </a>
                 <h5>Autores</h5>
+            </div>
+            <div class="col-md-3 service" style="cursor: pointer;">
+                <a href="{%url 'buscar-usuario' %}">
+                    <i class="bi bi-box-arrow-right"></i>
+                </a>
+                <h5 style="color: #255dc5;">Cerrar Sesion</h5>
             </div>
         </div>
     </div>
 
     <footer class="bg-dark text-light py-4">
-
+            
             <p class="text-center">© 2024 Anthony Maldonado y Alejandro Gonzalez - Todos los derechos reservados</p>
+            
         </div>
     </footer>
 

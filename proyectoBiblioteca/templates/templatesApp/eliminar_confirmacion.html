@@ -22,7 +22,7 @@
     </div>
     {% elif prestamo %}
     <div class="container mt-5">
-        <h2>Confimar Eliminación</h2>
+        <h2 style="color: #327aff;">Confimar Eliminación</h2>
         <p>¿Seguro desea eliminar el prestamo de: "{{ prestamo.cliente }} y {{ prestamo.libro }}"</p>
         <form method="post">
             {% csrf_token %}

@@ -24,7 +24,7 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="border-bottom: solid #255dc5;"">Prestar libro</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="font-weight: bold; border-bottom: solid #255dc5;"">Prestar libro</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" >Prestamos</a>
@@ -47,11 +47,11 @@
     </ul>
 
     <section class="FormProcesarPrestamo">
-        <h1 class="mb-4" id="Titleform">Procesar Préstamo</h1>
+        <h1 class="mb-4" id="Titleform" style="color: #327aff; padding: 20px;">Procesar Préstamo</h1>
         
         <div class="formDivProcesarPrestamo">
             <div class="LibroTitle">
-                <i class="bi bi-book-fill" ></i>
+                <i class="bi bi-book-fill" style="color:  #255dc5;"></i>
                 <h2 style="color:  #255dc5;">{{ libro.titulo }}</h2>
             </div>
             <form method="post" class="mb-4">

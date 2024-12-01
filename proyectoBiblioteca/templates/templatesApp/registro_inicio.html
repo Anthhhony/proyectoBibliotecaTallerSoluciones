@@ -64,9 +64,11 @@
                 {% endfor %}
                 {% endif %}
                 <div class="btn-registro">
+                    <br>
                     <button type="submit" class="btn btn-light">Registrar</button>
-                    <a href="{% url 'buscar-usuario' %}" class="btn btn-light" style="text-align: center;">
-                        <i class="bi bi-box-arrow-left"></i> Regresar
+                    
+                    <a href="{% url 'buscar-usuario' %}" class="btn btn-light regresar-btn" style="margin-top: 15px;">
+                        Volver
                     </a>
                 </div>
             </form>

@@ -38,16 +38,16 @@
             <a class="nav-link" href="{%url "mostrar-categorias" %}" >Categorias</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="border-bottom: solid #255dc5;">Editoriales</a>
+            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="font-weight: bold; border-bottom: solid #255dc5;">Editoriales</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'mostrar-autores' %}" >Autores</a>
         </li>
     </ul>
     <div class="container mt-4">
-        <h1>Lista de Editoriales</h1>
+        <h1 style="color: #327aff; text-align: center; padding: 20px;">Lista de Editoriales</h1>
         <form method="get" class="mb-3">
-            <input type="text" name="q" class="form-control" placeholder="Buscar editorial..." value="{{ query }}">
+            <input type="text" name="q" class="form-control" placeholder="Buscar editorial..." value="{{ query }}" style=" box-shadow: 0 0 3px #327aff;">
         </form>
         <table class="table table-striped">
             <thead>

@@ -27,13 +27,13 @@
           <a class="nav-link" href="{%url "lista-prestamo" %}" >Prestar Libro</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="border-bottom: solid #255dc5;">Prestamos</a>
+            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="font-weight: bold; border-bottom: solid #255dc5;">Prestamos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "mostrar-libros" %}" >Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" >Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" >Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "mostrar-categorias" %}" >Categorias</a>
@@ -46,7 +46,7 @@
         </li>
     </ul>
 
-    <h1 class="mb-4" style="text-align: center; margin: 10px;">Lista de Préstamos</h1>
+    <h1 class="mb-4" style="text-align: center; margin: 10px; color: #327aff; padding: 20px; ">Lista de Préstamos</h1>
 
     {%if prestamos %}
     <table border="1" class="table table-striped table-hover" id="tablePrestamosConfirmados">

@@ -23,7 +23,7 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="border-bottom: solid #255dc5;">Prestar libro</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" style="font-weight: bold; border-bottom: solid #255dc5;">Prestar libro</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "prestamos-confirmados" %}" >Prestamos</a>
@@ -32,7 +32,7 @@
             <a class="nav-link" href="{%url "mostrar-libros" %}" >Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" >Clientes</a>
+            <a class="nav-link" href="{%url "mostrar-clientes" %}" >Clientes</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{%url "mostrar-categorias" %}" >Categorias</a>
@@ -46,7 +46,7 @@
       </ul>
 
       <form class="mb-4" method="get">
-      <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Libros disponibles para préstamos</h1>
+      <h1 class="mb-4" style="text-align: center; margin: 10px; color: #327aff; padding: 20px;">Libros disponibles para préstamos</h1>
       {% if libros %}
         <form class="mb-4" method="get" >
             <div class="input-group" style="width: 45%; float: right; margin-bottom: 30px; margin-right: 10px;">
