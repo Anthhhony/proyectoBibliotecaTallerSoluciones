@@ -1,46 +1,80 @@
+h1{
+    color: #255dc5;
+}
 
 .navbar {
-    background-color: #4A148C;
+    background-color: #255dc5;
     color: #fff;
 }
-.navbar a, .navbar a:hover {
-    color: #fff;
+.navbar a:hover {
+    transition: 0.2s;
+    box-shadow: 0 0 8px #ffffff;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 8px;
 }
+
+.navbar a:not(:hover) {
+    transition: 0.2s;
+    text-shadow: 2px 2px 8px #002873;
+    font-size: 20px;
+}
+
+
 li:hover{
     transition: 0.2s;
-    border-bottom: solid #4A148C;
-    color: white;
+    color: #255dc5;
+    border-bottom: solid #255dc5;
+    font-weight: bold;
+    font-size: 18px;
+}
+li:not(:hover){
+    transition: 0.2s;
+    font-size: 15px;
 }
 
 .imagenLogoCaldera{
-    height: 50px;
+    height: 60px;
+    padding: 6px;
+}
 
+.imagenLogoCaldera:hover{
+    transition: 0.2s;
+    height: 60px;
+    box-shadow: 0 0 8px #ff0000;
+    padding: 5px;
+    border-radius: 8px;
 }
 
 .header {
     color: #fff;
     text-align: center;
     padding: 20px;
-    background-color: #4A148C;
+    background-color: #255dc5;
 }
 .header .logo {
     font-weight: bold;
 }
 .banner {
-    background-image: url(https://th.bing.com/th/id/R.3c0058ca746d1e56ed8ed95d028722b1?rik=LE5lJhn019coiQ&riu=http%3a%2f%2f4.bp.blogspot.com%2f-08P-dFRlPlM%2fUcM0BI1UmfI%2fAAAAAAAAAo8%2fRz2TzKejk_0%2fs1600%2f160%2bcaldera.jpg&ehk=Qkq2T5xgL%2f7kO9T%2bjEXMc5pjI7NBr5MImdf7CGw0sUA%3d&risl=&pid=ImgRaw&r=0);
+    background-image: url(https://th.bing.com/th/id/R.053af7fbee294be99a8c341c91df380e?rik=pVphYOMy%2bYqXxQ&pid=ImgRaw&r=0&sres=1&sresct=1);
     background-size: cover;
     background-position: center;
     padding: 80px 20px;
     color: #fff;
     text-align: center;
+
 }
 .banner h1 {
-    
+
     font-size: 36px;
     font-weight: bold;
+    text-shadow: 1px, 1px, 5px, black;
 }
 .banner p {
     font-size: 18px;
+    text-shadow: 1px, 1px, 5px, black;
 }
 .services {
     padding: 40px 20px;
@@ -52,10 +86,26 @@ li:hover{
     border-radius: 8px;
     margin: 10px;
 }
+
+.services .service:hover{
+    transition: 0.2s;
+    border-radius: 5px;
+    padding: 10px;
+    color: #0143c0;
+}
+.services .service:not(:hover){
+    transition: 0.2s;
+    border-radius: 5px;
+    padding: 20px;
+    color: #0143c0;
+}
+
 .services .service i {
     font-size: 30px;
-    color: #4A148C;
+    color: #255dc5;
 }
+
+
 .services .service h5 {
     margin-top: 10px;
     font-size: 18px;
@@ -64,5 +114,4 @@ li:hover{
 th{
     background-color: #4A148C;
 }
-
 

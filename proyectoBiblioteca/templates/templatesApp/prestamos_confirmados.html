@@ -24,29 +24,29 @@
     </nav>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-          <a class="nav-link" href="{%url "lista-prestamo" %}" style="color: black">Prestar Libro</a>
+          <a class="nav-link" href="{%url "lista-prestamo" %}" >Prestar Libro</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="color: black; border-bottom: solid #4A148C;">Prestamos</a>
+            <a class="nav-link" href="{%url "prestamos-confirmados" %}" style="border-bottom: solid #255dc5;">Prestamos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-libros" %}" style="color: black">Libros</a>
+            <a class="nav-link" href="{%url "mostrar-libros" %}" >Libros</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Clientes</a>
+            <a class="nav-link" href="#" >Clientes</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{%url "mostrar-categorias" %}" style="color: black;">Categorias</a>
+            <a class="nav-link" href="{%url "mostrar-categorias" %}" >Categorias</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" style="color: black">Editoriales</a>
+            <a class="nav-link" href="{% url 'mostrar-editoriales' %}" >Editoriales</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{% url 'mostrar-autores' %}" style="color: black">Autores</a>
+            <a class="nav-link" href="{% url 'mostrar-autores' %}" >Autores</a>
         </li>
     </ul>
 
-    <h1 class="mb-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: center; margin: 10px;">Lista de Préstamos</h1>
+    <h1 class="mb-4" style="text-align: center; margin: 10px;">Lista de Préstamos</h1>
 
     {%if prestamos %}
     <table border="1" class="table table-striped table-hover" id="tablePrestamosConfirmados">

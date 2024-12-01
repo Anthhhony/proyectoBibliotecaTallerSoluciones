@@ -10,7 +10,6 @@
 }
 section{
     position: relative;
-    max-width: 400px;
     background-color: transparent;
     border:2px solid white;
     border-radius: 20px;
@@ -89,4 +88,22 @@ button:hover{
 p{
     color: white;
 }
+
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.SeccionIzquierda, .SeccionDerecha {
+    flex: 1;
+}
+
+.inputbox {
+    max-width: 100%;
+}
+
+
+
+
 
