@@ -18,6 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from AppBiblioteca.views import vista, mostrar_editoriales, mostrar_autores, mostrar_categorias, agregar_categoria, eliminar_categoria, lista_prestamos, procesar_prestamo, prestamos_confirmados, finalizar_prestamo, eliminar_prestamo, mostrar_libros, agregar_libro, editar_libro, eliminar_libro, register, buscar_usuario, mostrar_clientes, agregar_cliente, editar_cliente, eliminar_cliente
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,3 +46,5 @@ urlpatterns = [
     path('editoriales/', mostrar_editoriales, name='mostrar-editoriales'),
     path('autores/', mostrar_autores, name='mostrar-autores'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

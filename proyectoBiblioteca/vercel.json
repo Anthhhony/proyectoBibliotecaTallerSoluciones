@@ -1,0 +1,14 @@
+{
+    "buils" : [
+        {
+            "src": "proyectoBiblioteca/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "proyectoBiblioteca/wsgi.py"
+        }
+    ]
+}
