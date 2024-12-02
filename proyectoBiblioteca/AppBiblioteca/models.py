@@ -5,7 +5,16 @@ from django.core.validators import RegexValidator, EmailValidator, MaxLengthVali
 # Create your models here.
     
 class Usuario(models.Model):
+    """
+    Representa a un usuario en el sistema con sus datos básicos y credenciales.
 
+    Attributes:
+        nombre (CharField): Nombre del usuario, puede contener letras y espacios.
+        rut (CharField): RUT del usuario en formato chileno, debe ser único.
+        contrasena (CharField): Contraseña del usuario con validaciones específicas.
+        correo (EmailField): Correo electrónico único del usuario.
+        telefono (CharField): Número de teléfono del usuario con formato válido.
+    """
     nombre = models.CharField(
         null=True,
         blank=True,
@@ -17,7 +26,6 @@ class Usuario(models.Model):
             )
         ]
     )
-
     rut = models.CharField(
         max_length=12,
         unique=True,
@@ -28,7 +36,6 @@ class Usuario(models.Model):
             )
         ]
     )
-
     contrasena = models.CharField(
         max_length=128,
         validators=[
@@ -39,14 +46,11 @@ class Usuario(models.Model):
             )
         ]
     )
-
     correo = models.EmailField(
         unique=True,
         null=True,
-        blank=True,
-        validators=[EmailValidator(message="Debe ser un correo válido.")]
+        blank=True
     )
-
     telefono = models.CharField(
         max_length=15,
         null=True,
@@ -60,31 +64,83 @@ class Usuario(models.Model):
     )
 
     def __str__(self):
+        """
+        Devuelve una representación en cadena del modelo.
+
+        Returns:
+            str: Nombre del usuario.
+        """
         return self.nombre
+
 
 class Categoria(models.Model):
+    """
+    Representa una categoría asociada a libros.
+
+    Attributes:
+        nombre (CharField): Nombre de la categoría, debe tener al menos 3 caracteres.
+    """
     nombre = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
-    
-    
+
     def __str__(self):
+        """
+        Devuelve una representación en cadena del modelo.
+
+        Returns:
+            str: Nombre de la categoría.
+        """
         return self.nombre
 
+
 class Cliente(models.Model):
-    nombre =  models.CharField(max_length=50, validators=[MinLengthValidator(3)])
+    """
+    Representa un cliente que puede realizar préstamos de libros.
+
+    Attributes:
+        nombre (CharField): Nombre del cliente.
+        direccion (CharField): Dirección del cliente.
+        telefono (CharField): Número de teléfono del cliente con formato chileno.
+        correo (EmailField): Correo electrónico del cliente.
+        usuario (ForeignKey): Relación con el modelo Usuario.
+    """
+    nombre = models.CharField(max_length=50, validators=[MinLengthValidator(3)])
     direccion = models.CharField(max_length=100, validators=[MinLengthValidator(3)])
     telefono = models.CharField(
         max_length=15,
-        validators=[RegexValidator(regex=r'^(?:\+56|56)?9\d{8}$', message='Telefono incorrecto. Ejemplo: +56912345678')]
+        validators=[
+            RegexValidator(
+                regex=r'^(?:\+56|56)?9\d{8}$',
+                message='Teléfono incorrecto. Ejemplo: +56912345678'
+            )
+        ]
     )
-    correo = models.EmailField(
-        validators=[EmailValidator(message='Correo incorrecto.')]
-    )
+    correo = models.EmailField(validators=[EmailValidator(message='Correo incorrecto.')])
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
-    
+
     def __str__(self):
+        """
+        Devuelve una representación en cadena del modelo.
+
+        Returns:
+            str: Nombre del cliente.
+        """
         return self.nombre
-    
+
+
 class Libro(models.Model):
+    """
+    Representa un libro en la biblioteca.
+
+    Attributes:
+        isbn (CharField): Código ISBN único del libro.
+        titulo (CharField): Título del libro.
+        autor (CharField): Nombre del autor del libro.
+        editorial (CharField): Nombre de la editorial del libro.
+        anio_publicacion (BigIntegerField): Año de publicación del libro.
+        disponibilidad (BooleanField): Indica si el libro está disponible.
+        usuario (ForeignKey): Relación con el modelo Usuario.
+        categorias (ManyToManyField): Relación con múltiples categorías.
+    """
     isbn = models.CharField(max_length=100, unique=True)
     titulo = models.CharField(max_length=100)
     autor = models.CharField(max_length=50)
@@ -93,11 +149,30 @@ class Libro(models.Model):
     disponibilidad = models.BooleanField(default=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
     categorias = models.ManyToManyField(Categoria, related_name='libros')
-    
+
     def __str__(self):
+        """
+        Devuelve una representación en cadena del modelo.
+
+        Returns:
+            str: Título del libro.
+        """
         return self.titulo
 
+
 class Prestamo(models.Model):
+    """
+    Representa un préstamo de un libro a un cliente.
+
+    Attributes:
+        fecha_prestamo (DateField): Fecha en la que se realizó el préstamo.
+        fecha_devolucion (DateField): Fecha en la que se espera la devolución.
+        estado (BooleanField): Indica si el préstamo está activo.
+        cliente (ForeignKey): Relación con el modelo Cliente.
+        libro (ForeignKey): Relación con el modelo Libro.
+        categoria (ForeignKey): Relación con el modelo Categoria.
+        usuario (ForeignKey): Relación con el modelo Usuario.
+    """
     fecha_prestamo = models.DateField()
     fecha_devolucion = models.DateField()
     estado = models.BooleanField(default=False)
@@ -105,7 +180,14 @@ class Prestamo(models.Model):
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE, null=True, blank=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True, blank=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, null=True, blank=True)
-    
+
     def __str__(self):
-        return f"Prestamo - {self.cliente.nombre}"
+        """
+        Devuelve una representación en cadena del modelo.
+
+        Returns:
+            str: Información del préstamo, incluyendo el nombre del cliente.
+        """
+        return f"Préstamo - {self.cliente.nombre if self.cliente else 'Sin Cliente'}"
+
     
