@@ -19,6 +19,7 @@ class LibroForm(forms.ModelForm):
         required=True
     )
 
+
     class Meta:
         model = Libro
         fields = ['isbn', 'titulo', 'autor', 'editorial', 'anio_publicacion', 'disponibilidad', 'usuario']
