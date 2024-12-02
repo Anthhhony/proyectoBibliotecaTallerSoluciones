@@ -45,7 +45,10 @@
         </li>
     </ul>
 
+    
+
     <h1 class="mb-4" style=" text-align: center; margin: 10px; color: #327aff; padding: 20px;">Clientes registrados en sistema</h1>
+    
 
     {% if cliente %}
     <form class="mb-4" method="get">
@@ -63,7 +66,7 @@
                 <th>Teléfono</th>
                 <th>Correo</th>
                 <th>Registrado por Usuario</th>
-                <th>Acciones</th>
+                <th>Acciones <a href="{%url 'mostrar-triggers' %}" style="background-color: #00000000; margin-left: 5%; padding: 5px;" title="Ver manipulaciones que se hicieron a los registros de clientes"><i class="bi bi-question-diamond-fill" style="color: #ffffff;"></i></a></th>
             </tr>
         </thead>
         <tbody>

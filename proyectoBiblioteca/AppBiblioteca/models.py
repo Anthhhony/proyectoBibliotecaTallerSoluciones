@@ -5,7 +5,6 @@ from django.core.validators import RegexValidator, EmailValidator, MaxLengthVali
 # Create your models here.
     
 class Usuario(models.Model):
-    # Clave primaria automática.
 
     nombre = models.CharField(
         null=True,
@@ -18,7 +17,6 @@ class Usuario(models.Model):
             )
         ]
     )
-    # Nombre del usuario, con validación para letras y espacios.
 
     rut = models.CharField(
         max_length=12,
@@ -30,7 +28,6 @@ class Usuario(models.Model):
             )
         ]
     )
-    # RUT único, validado según el formato chileno.
 
     contrasena = models.CharField(
         max_length=128,
@@ -42,7 +39,6 @@ class Usuario(models.Model):
             )
         ]
     )
-    # Contraseña con requisitos de seguridad.
 
     correo = models.EmailField(
         unique=True,
@@ -50,7 +46,6 @@ class Usuario(models.Model):
         blank=True,
         validators=[EmailValidator(message="Debe ser un correo válido.")]
     )
-    # Campo de correo electrónico único, opcional y validado.
 
     telefono = models.CharField(
         max_length=15,
@@ -63,7 +58,6 @@ class Usuario(models.Model):
             )
         ]
     )
-    # Campo opcional para teléfono, con validación de formato.
 
     def __str__(self):
         return self.nombre

@@ -301,5 +301,14 @@ def mostrar_autores(request):
         'query': query,
     })
 
+def mostrar_triggers_cliente(request):
+    # Consulta directa a la tabla cliente_log
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT id, accion, cliente_id, nombre, fecha FROM cliente_log")
+        registros = cursor.fetchall()
+    
+    # Renderiza la plantilla con los registros
+    return render(request, "templatesApp/triggers_cliente.html", {"registros": registros})
+
 
 
