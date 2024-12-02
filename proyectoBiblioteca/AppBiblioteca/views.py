@@ -197,6 +197,7 @@ def eliminar_libro(request, pk):
     
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'libro': libro})
 
+from django.db import connection
 
 
 def mostrar_clientes(request):
@@ -248,6 +249,14 @@ def eliminar_cliente(request, pk):
         cliente.delete()
         return redirect(mostrar_clientes)
     return render(request, 'templatesApp/eliminar_confirmacion.html', {'cliente':cliente})
+
+"""def eliminar_cliente(request, pk):
+    if request.method == 'POST':
+        with connection.cursor() as cursor:
+            cursor.callproc('EliminarCliente', [pk])
+        return redirect(mostrar_clientes)
+    cliente = Cliente.objects.get(pk=pk)
+    return render(request, 'templatesApp/eliminar_confirmacion.html', {'cliente': cliente})"""
 
 
 def mostrar_categorias(request):
